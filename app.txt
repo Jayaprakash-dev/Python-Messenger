@@ -1,0 +1,21 @@
+app functionality
+    * create chat rooms
+        1. group chats
+        2. one to one chats
+    
+    * It saves username and email id.
+    
+    * Don't save user message logs or any other chatting information and
+    all chats will be when user leaves the group or refresh the page.
+
+To-Do:
+    * only one admin in a group
+    * only will permits another person to join
+    * a request will be sent to admin when a person tries to connect
+    * Every user have unique user name
+    * unique room-id has to be generated for chat groups
+    * connection request has to be rejected if 'one to one' model has two persons
+    in the current chat.
+    * chat room has to be deleted and disconnects all other persons,
+    if admin left the group.
+    * notification badges has to be added (optional)
