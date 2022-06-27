@@ -11,15 +11,15 @@
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet"> 
-    
-    <title>Chat App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet"> 
+   
+    <title>Pyhon Messenger</title>
 </head>
 <body>
     
     <div class="main-container">
 
-        <div class="container-l">
+        <div class="container-l" id="container-l">
             <div class="top-section">
                 <div class="user">
                     <img src="" alt="JP" class="profile-pic" id="profile-pic">
@@ -27,8 +27,8 @@
                 </div>
                 <p class="user-name" id="user-name">Jaya Prakash</p>
                 <div class="utils-btns">
-                    <img src="./static/assets/Refresh.svg" alt="" class="icon-btn">
-                    <img src="./static/assets/back.svg" alt="" class="icon-btn">
+                    <img src="./static/assets/Refresh.svg" alt="" class="icon-btn" onclick="refresh()">
+                    <!-- <img src="./static/assets/back.svg" alt="" class="icon-btn" onclick="closePane()"> -->
                 </div>
             </div>
 
@@ -135,12 +135,12 @@
             <div class="chat-section">
                 <div class="inner-section">
                     <textarea name="message-txt" id="" cols="30" rows="10" class="textarea"></textarea>
-                    <img style="position: absolute;" class="send-btn" src="./static/assets/Send.svg">
+                    <img style="position: absolute;" class="icon-btn" src="./static/assets/Send.svg">
                 </div>
             </div>
         </div>
-
     </div>
 
+    <script src="./js/btn.js"></script>
 </body>
 </html>
