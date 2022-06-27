@@ -9,19 +9,18 @@
     <link rel="stylesheet" href="/main/static/css/roomlogin.css">
 
     <title>Python Messenger</title>
-
-    {% load static %}
 </head>
 <body>
 
     <div class="container">
         <div class="login-section">
             <p class="heading">Chat Room Login</p>
-            <form action="" method="POST" class="room-login">
+
+            <form method='POST' action='' class="room-login">
                 {% csrf_token %}
                 <div class="name-section">
                     <label class="name-label" for="username">Username</label>
-                    <input type="text" class="name" name="username" placeholder="enter your username" required>
+                    <input type="text" class="name" name="username" placeholder="username" required>
                 </div>
                 <br>
 
@@ -31,14 +30,12 @@
                 </div>
                 
                 <div class="form-btns">
-                    <button class="btn" type="submit" onsubmit="submitForm()">Submit</button>
+                    <button class="btn" type="submit" value="submit" onsubmit="submitForm()">Submit</button>
                     <button class="btn">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <script type="text/javascript" src="{% static 'js/websocket.js' %}"></script>
     
 </body>
 </html>

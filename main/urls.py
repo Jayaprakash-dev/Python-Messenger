@@ -1,8 +1,11 @@
+from pydoc import visiblename
+from unicodedata import name
 from django.urls import path
 from . import views
 
 app_name = 'main'
 
 urlpatterns = [
-    path('roomlogin/', views.room_login_page, name='room_login')
+    path('roomlogin/', views.ChatRoomLogin.as_view(), name='room_login'),
+    path('chat/room/<int:room_id>', views.ChatRoom.as_view(), name='chat_room')
 ]
