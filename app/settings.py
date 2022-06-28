@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'channels',
     'main',
     'appsocket',
+    'userauthentication',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,10 +132,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'main/static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "main/templates/main/static"),
+    os.path.join(BASE_DIR, 'userauthentication/templates/userauthentication/static')
 ]
 
 # Default primary key field type

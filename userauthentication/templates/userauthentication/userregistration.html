@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/registrationpage.css">
+
+    <!-- jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous">
+    </script>
+
+    <title>Python Messenger</title>
+</head>
+<body>
+
+    <p>User Registration Form</p>
+
+    <div class="container">
+        <form action="" method="POST" class="registration-form">
+
+            {% csrf_token %}
+            {{form.username.label}} <br>
+            {{form.username}}
+            <br>
+            {{form.email.label}} <br>
+            {{form.email}}
+            <br>
+
+            <div class="message-section">
+                <p class="message"></p>
+            </div>
+
+            <br>
+            <button class="submit-btn" id="submit-btn" type="submit" value="submit">continue</button>
+        </form>
+    </div>
+    
+    <script src="/static/js/form.js"></script>
+
+</body>
+</html>
