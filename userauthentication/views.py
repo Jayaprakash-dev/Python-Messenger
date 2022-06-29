@@ -1,4 +1,6 @@
+from email import message
 import re
+from types import NoneType
 import redis
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -20,6 +22,13 @@ class UserLoginView(View):
         _login_form = UserLoginForm()
         return render(req, 'userauthentication/userlogin.html', {'form': _login_form})
 
+def name_validator(text_data):
+    if text_data is None:
+        return False
+    
+    if re.search("^[\w.@+-]+\Z", text_data) is None:
+        return False
+    
 
 class UserRegisterView(View):
 
@@ -30,6 +39,7 @@ class UserRegisterView(View):
     def post(self, req):
         _username = req.POST.get('username')
         _email = req.POST.get('email')
+        _submit = False
 
         # checks username already exists in the database or not
         if User.objects.filter(username=_username).exists():
@@ -48,51 +58,59 @@ class UserRegisterView(View):
             return JsonResponse(data)
 
         # if username & email is valid, it will be updated in the redis memeory
-        redis_client.set('username', _username)
-        redis_client.set('email', _email)
+        if _submit:
+            User.objects.create_user(username=_username, email=_email)
 
         return HttpResponseRedirect(reverse('userauthentication:signup'))
 
 
 class UserSignUpView(View):
+    reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
+    pattern = re.compile(reg)
 
     def get(self, req):
-        initial_data = {
-            'username': (redis_client.get('username').decode('utf-8')),
-            'email': str(redis_client.get('email').decode('utf-8'))
-        }
-        _signup_form = UserSignupForm(initial=initial_data)
+        _signup_form = UserSignupForm()
         return render(req, 'userauthentication/usersignup.html', {'form': _signup_form})
 
     def post(self, req):
 
+        _username = req.POST.get('username')
         _first_name = req.POST.get('first_name')
         _last_name = req.POST.get('last_name')
         _password_1 = req.POST.get('password1')
         _password_2 = req.POST.get('password2')
+        submit = req.POST.get('submit')
 
-        if len(_first_name) > 0 or len(_last_name) > 0:
-            if re.search("^[\w.@+-]+\Z", _first_name) is None:
-                data = {'message': "first or last name is not valid"}
-                return JsonResponse(data)
-
-            if re.search("^[\w.@+-]+\Z", _last_name) is None:
-                data = {'message': "first or last name is not valid"}
-                return JsonResponse(data)
-
-        if len(_password_1) >= 8:
-            if _password_1 == _password_2:
+        try:
+            if name_validator(_first_name) == False and len(_first_name) > 0:
+                return JsonResponse({'message': '!name', 'from': 'first'})
+            
+            if name_validator(_last_name) == False and len(_last_name) > 0:
+                return JsonResponse({'message': '!name', 'from': 'last'})
+            
+            if name_validator(_username) is False and len(_username) > 0:
+                return JsonResponse({'message': '!username'})
+            
+        except Exception:
+            if _password_1 != None:
+                if re.search(UserSignUpView.pattern, _password_1):
+                    message = 'pass_valid'
+                        
+                    if _password_1 == _password_2:
+                        message = 'pass_match'
+                        print(message)
+                            
+                    return JsonResponse({'message': message})
                 
-                _signup_form = UserSignupForm(req.POST)
-                
-                if _signup_form.is_valid():
-                    _signup_form.save()
-
-            else:
-                data = {'message': "password mismatching"}
-                return JsonResponse(data)
-
-        else:
-            return JsonResponse({'message': ''})
-
-        return HttpResponseRedirect(reverse('userauthentication:register'))
+                else:
+                    return JsonResponse({'message': 'not valid'})
+        
+        if submit == 'submit':
+            User.objects.create_user(
+                username=_username,
+                password=_password_2,
+                first_name=_first_name,
+                last_name=_last_name,
+            ).save()
+            
+        return HttpResponseRedirect(reverse('userauthentication:login'))

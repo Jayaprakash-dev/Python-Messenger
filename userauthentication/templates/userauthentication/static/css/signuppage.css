@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+}
+html body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #e4eefa;
+}
+
+@media (min-width: 700px) {
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+  .container .logo {
+    position: absolute;
+    right: 5%;
+  }
+  .container .signup-form {
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 600px;
+    max-width: 600px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: #fff;
+    padding: 2% 4%;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .container .signup-form .heading {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 3.2em;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .container .signup-form .status {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+  }
+  .container .signup-form #username-section, .container .signup-form #password-section {
+    margin-top: 15px;
+  }
+  .container .signup-form .row #name-status-msg {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #E24032;
+    position: relative;
+    top: 50%;
+    transform: translateY(-57%);
+    display: none;
+  }
+  .container .signup-form #username-status-msg {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #E24032;
+    padding-top: 10px;
+    display: none;
+  }
+  .container .signup-form .status-icon {
+    width: 22px;
+    display: none;
+  }
+  .container .signup-form .col {
+    position: relative;
+  }
+  .container .signup-form .col .pass-show-btn {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+  }
+  .container .signup-form .col .pass-show-btn:hover {
+    cursor: pointer;
+  }
+  .container .signup-form .messages {
+    margin-top: 5px;
+    padding-left: 5px;
+  }
+  .container .signup-form .messages .row {
+    display: flex;
+    flex-direction: row;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .container .signup-form .messages .row .icon {
+    width: 42px;
+    margin-top: -5px;
+    margin-left: -17px;
+    display: inline-block;
+  }
+  .container .signup-form .messages .row p {
+    padding-top: 2%;
+    text-align: left;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #E24032;
+    float: right;
+    font-weight: 600;
+  }
+  .container .signup-form .btn {
+    width: 100%;
+    margin-top: 26px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 700px) {
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+  .container .logo {
+    position: absolute;
+    right: 5%;
+  }
+  .container .signup-form {
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 99.5%;
+    max-width: 99.5%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    background-color: white;
+    padding: 2% 4%;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .container .signup-form .heading {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 3.2em;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .container .signup-form .col {
+    margin-bottom: 15px;
+  }
+  .container .signup-form .messages .row {
+    display: flex;
+    flex-direction: row;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .container .signup-form .messages .row .icon {
+    width: 45px;
+    display: inline-block;
+  }
+  .container .signup-form .messages .row p {
+    padding-top: 2%;
+    text-align: left;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #E24032;
+    float: right;
+  }
+  .container .signup-form .btn {
+    width: 100%;
+    margin-top: 26px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+}/*# sourceMappingURL=signuppage.css.map */
