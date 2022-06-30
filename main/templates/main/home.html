@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/homepage.css">
+
+    <!-- jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous">
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container" style="max-width: 100%; padding: 0;">
+
+        <nav class="navbar">
+            <ul>
+                <div class="notification-section">
+                    <img src="/static/assets/notification.svg" alt="" class="icon">
+                    <div class="badge">
+                        <div class="notify-count">2</div>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+
+        <div class="main-section">
+            <button class="btn btn-primary" onclick="showForm(this)">Create room</button>
+            <button class="btn btn-primary" onclick="showForm(this)">Join room</button>
+
+            <div class="room-creation-form">
+                <label for="room-name" class="room-name-label">Room name</label> <br>
+                <input type="text" name="room-name" class="room-name-input">
+                <br>
+                <label for="password" class="password-label">Password</label> <br>
+                <input type="text" name="password" class="password-input">
+                <br>
+                <button class="btn create-room-btn" onclick="createRoom()">Create room</button>
+                <button class="btn close" onclick="closeForm(this)">Close</button>
+            </div>
+
+            <div class="room-join-form">
+                <label for="room-name" class="room-name-label">Room name</label> <br>
+                <input type="text" name="room-name" class="room-name-input">
+                <br>
+                <label for="password" class="password-label">Password</label> <br>
+                <input type="text" name="password" class="password-input">
+                <br>
+                <button class="btn create-room-btn" onclick="joinRoom()">Join room</button>
+                <button class="btn close" onclick="closeForm(this)">Close</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        function showForm(e) {
+            
+            if (e.textContent === 'Create room') {
+                $('.room-creation-form').css('display', 'block');
+                $('.room-join-form').css('display', 'none');
+            } else {
+                $('.room-join-form').css('display', 'block');
+                $('.room-creation-form').css('display', 'none');
+            }
+        }
+
+        function closeForm(e) {
+
+            if (e.parentNode.className === 'room-creation-form') {
+                $('.room-creation-form').css('display', 'none');
+            } else {
+                $('.room-join-form').css('display', 'none');
+            }
+        }
+
+    </script>
+
+    <script src="chatroomhandler.js"></script>
+</body>
+</html>

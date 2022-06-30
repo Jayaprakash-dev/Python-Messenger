@@ -49,38 +49,33 @@ html
                 display: flex
                 flex-direction: row
                 margin-left: 5px
+                height: fit-content
             
-            #username-section, #password-section
+            #username-section, #email-section
+                margin-top: 15px
+
+            #password-section
                 margin-top: 15px
             
-            .row #name-status-msg
+            .row #name-status-msg,  #username-status-msg, #email-status-msg
                 margin-left: 8px
                 font-weight: 600
                 font-size: 0.8em
                 color: #E24032
                 position: relative
-                top: 50%
-                transform: translateY(-57%)
-                display: none
-            
-            #username-status-msg
-                margin-left: 8px
-                font-weight: 600
-                font-size: 0.8em
-                color: #E24032
-                padding-top: 10px
+                top: 7px
                 display: none
             
             .status-icon
                 width: 22px
                 display: none
             
-            .col
+            #password-section
                 position: relative
                 .pass-show-btn
                     position: absolute
                     top: 50%
-                    right: 25px
+                    left: 48.5%
                     transform: translateY(-50%)
                     width: 17px
                     height: 17px

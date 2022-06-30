@@ -16,8 +16,17 @@ class ChatRoomLogin(View):
 
         return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_id': room_id}))
 
+
 class ChatRoom(View):
 
     def get(self, req, room_id):
         return render(req, 'main/main.html')
+ 
     
+class HomePage(View):
+    
+    def get(self, req):
+        return render(req, 'main/home.html')
+    
+    def post(self, req):
+        pass

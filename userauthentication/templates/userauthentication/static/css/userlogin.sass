@@ -1,0 +1,151 @@
+@import '../../../../../main/templates/main/static/css/fonts'
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+html
+    width: 100vw
+    height: 100vh
+
+    body
+        width: 100%
+        height: 100%
+        overflow-x: hidden
+        background-color: #e4eefa
+
+.message
+    font-weight: 600
+    font-size: 0.9em
+    color: #E24032
+    margin-left: 4px
+
+@media (min-width: 700px)
+    .container
+        width: 100%
+        height: 100%
+
+        .logo
+            position: absolute
+            right: 5%
+
+        .signup-form
+            position: relative
+            top: 15%
+            left: 50%
+            transform: translateX(-50%)
+            min-width: 600px
+            max-width: 600px
+            height: fit-content
+            background-color: #fff
+            padding: 2% 4%
+            border: none
+            border-radius: 12px
+            margin-bottom: 15px
+
+            .heading
+                font-family: $monsterrat
+                font-weight: bold
+                text-align: center
+                margin-bottom: 50px
+
+                h1
+                    font-size: 3.2em
+                    font-weight: bold
+                p
+                    font-size: 0.9em
+                    color: #707070
+
+            .col
+                margin-bottom: 15px
+
+                input
+                    height: 50px
+            
+            .row
+                display: flex
+                flex-direction: row
+
+                .icon
+                    width: 45px
+                    display: inline-block
+                
+                p
+                    text-align: left
+                    width: fit-content
+                    font-size: 1em
+                    font-weight: 500
+                    float: right
+            
+            .btn
+                width: 100%
+                margin-top: 35px
+                margin-bottom: 35px
+                font-weight: 600
+                font-size: 1.2em
+
+@media (max-width: 700px)
+
+    .container
+        width: 100%
+        height: 100% 
+
+        .logo
+            position: absolute
+            right: 5%
+
+        .signup-form
+            position: relative
+            top: 10%
+            left: 50%
+            transform: translateX(-50%)
+            min-width: 99.5%
+            max-width: 99.5%
+            height: fit-content
+            background-color: #ffff
+            padding: 2% 4%
+            border: none
+            border-radius: 12px
+            margin-bottom: 15px
+
+            .heading
+                font-family: $monsterrat
+                font-weight: bold
+                text-align: center
+                margin-bottom: 50px
+
+                h1
+                    font-size: 3.2em
+                    font-weight: bold
+                p
+                    font-size: 0.9em
+                    color: #707070
+
+            .col
+                margin-bottom: 15px
+
+                input
+                    height: 50px
+            
+            .row
+                display: flex
+                flex-direction: row
+
+                .icon
+                    width: 45px
+                    display: inline-block
+                
+                p
+                    text-align: left
+                    width: fit-content
+                    font-size: 1em
+                    font-weight: 500
+                    float: right
+            
+            .btn
+                width: 100%
+                margin-top: 35px
+                margin-bottom: 35px
+                font-weight: 600
+                font-size: 1.2em
