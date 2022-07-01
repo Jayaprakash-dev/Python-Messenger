@@ -236,12 +236,35 @@ html body {
   font-weight: 500;
   width: 100%;
 }
+.main-container .container-r .top-section .inner-section-r {
+  display: flex;
+  flex-direction: row;
+}
+.main-container .container-r .top-section .inner-section-r .icon {
+  width: 25px;
+  height: 25px;
+  transition: 0.4s ease-out;
+  width: 35px;
+  height: 35px;
+  margin-right: 40px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.main-container .container-r .top-section .inner-section-r .icon:hover {
+  cursor: pointer;
+  padding: 4px;
+  background-color: #ededed;
+  border: none;
+  border-radius: 50%;
+}
 .main-container .container-r .top-section .inner-section-r button {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  padding: 3.4% 4%;
-  width: 120px;
+  padding: 1% 4%;
+  width: 125px;
+  height: 35px;
   border: none;
   border-radius: 4.6px;
   font-size: 17.7px;
@@ -289,8 +312,8 @@ html body {
   width: 25px;
   height: 25px;
   transition: 0.4s ease-out;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   bottom: 20px;
   right: 20px;
 }
@@ -300,4 +323,56 @@ html body {
   background-color: #ededed;
   border: none;
   border-radius: 50%;
+}
+.main-container .notification {
+  position: absolute;
+  width: 25%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  box-shadow: 17px 17px 68px -6px rgba(135, 124, 135, 0.8);
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 25px;
+}
+.main-container .notification .username {
+  font-size: 2em;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.main-container .notification .msg {
+  color: #6d6969;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+.main-container .notification .action-btns {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0 17px;
+}
+.main-container .notification .action-btns .ok-btn, .main-container .notification .action-btns .remove-btn {
+  font-weight: 600;
+  font-size: 1.1em;
+  background-color: black;
+  color: white;
+  margin-bottom: 15px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  transition: 0.2s ease-out;
+}
+.main-container .notification .action-btns .ok-btn:hover, .main-container .notification .action-btns .remove-btn:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6784313725);
 }/*# sourceMappingURL=main.css.map */

@@ -1,32 +1,62 @@
-from audioop import reverse
+import json
 from html import escape
-from django.shortcuts import render
+
+import redis
 from django.http import HttpResponseRedirect
-from django.views import View
+from django.shortcuts import render
 from django.urls import reverse
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ChatRoomLogin(View):
+redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
+
+class ChatRoom(LoginRequiredMixin, View):
+    login_url = 'userauthentication:login'
+    redirect_field_name = 'redirect_to'
+    
+    def get(self, req, room_name):
+        username = req.user.username.title()
+        # username = username[0].upper() + username[1:]
+        username_first = username[0].upper()
+        
+        return render(req, 'main/main.html', {'room_name': room_name, 'username': username, 'username_first': username_first})
+
+
+class HomePage(LoginRequiredMixin, View):
+    login_url = 'userauthentication:login'
+    redirect_field_name = 'redirect_to'
+    
     def get(self, req):
-        return render(req, 'main/roomlogin.html')
-    
+        return render(req, 'main/home.html', {'message': ''})
+
     def post(self, req):
-    
-        room_id = str(escape(req.POST.get('room-id')))
 
-        return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_id': room_id}))
+        room_name = req.POST.get("room-name")
+        password = req.POST.get('password')
+        room_type = req.POST.get('type')
+        
+        if room_type == 'c':
+            for key in redis_client.scan_iter(room_name[0] + '*'):
 
+                if key.decode() == room_name:
+                    return render(req, 'main/home.html', {'message': 'room name already taken'})
 
-class ChatRoom(View):
+        elif room_type == 'j':
+            
+            for key in redis_client.scan_iter(room_name[0] + '*'):
+                
+                if key.decode() == room_name:
+                    room_password = redis_client.hget(room_name, 'password')
+                    room_password = room_password.decode()
+                    
+                    if password == room_password:
+                        return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_name': room_name}))
+                    else:
+                        return render(req, 'main/home.html', {'message': 'Invalid password' })
+                
+                else:
+                    return render(req, 'main/home.html', {'message': 'specified room is not available, Invalid room_name' })
 
-    def get(self, req, room_id):
-        return render(req, 'main/main.html')
- 
-    
-class HomePage(View):
-    
-    def get(self, req):
-        return render(req, 'main/home.html')
-    
-    def post(self, req):
-        pass
+        redis_client.hset(room_name, 'password', password)
+        return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_name': room_name}))

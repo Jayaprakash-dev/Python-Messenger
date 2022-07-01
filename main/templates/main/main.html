@@ -15,6 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet"> 
    
+    <!-- jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous">
+    </script>
+    
     <title>Pyhon Messenger</title>
 </head>
 <body>
@@ -24,15 +30,18 @@
         <div class="container-l" id="container-l">
             <div class="top-section">
                 <div class="user">
-                    <img src="" alt="JP" class="profile-pic" id="profile-pic">
+                    <img src="" alt={{username_first}} class="profile-pic" id="profile-pic">
                     <div class="user-status"></div>
                 </div>
-                <p class="user-name" id="user-name">Jaya Prakash</p>
+                <p class="user-name" id="username">{{username}}</p>
                 <div class="utils-btns">
                     <img src="{% static 'assets/Refresh.svg' %}" alt="" class="icon-btn" onclick="refresh()">
                     <!-- <img src="./static/assets/back.svg" alt="" class="icon-btn" onclick="closePane()"> -->
                 </div>
             </div>
+
+            <input type='hidden' value={{room_name}} name="room_name">
+            <input type='hidden' value={{username}} name="username">
 
             <div class="chat-rooms-section">
                 <p class="chat-rooms-txt">Chat rooms</p>
@@ -127,6 +136,7 @@
                     <p class="time">Created 20 mins ago</p>
                 </div>
                 <div class="inner-section-r">
+                    <image class="icon" src="/static/assets/notification.svg"></image>
                     <button class="leave-room">Leave</button>
                 </div>
             </div>
@@ -141,8 +151,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="notification" style="display: none;">
+            <p class="username">Jhon Wick</p>
+            <p class="msg">A new member added in the group</p>
+
+            <div class="action-btns">
+                <button class="ok-btn" onclick="$('.notification').css('display', 'none')">Ok</button>
+                <button class="remove-btn">Remove</button>
+            </div>
+        </div>
     </div>
 
-    <script src="./js/btn.js"></script>
+    <script src="/static/js/chatroomhandler.js"></script>
 </body>
 </html>

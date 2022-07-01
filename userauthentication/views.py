@@ -1,11 +1,11 @@
 from email import message
 import re
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 class UserLoginView(View):
 
@@ -16,8 +16,6 @@ class UserLoginView(View):
         _user_input = req.POST.get('user_input')
         _password = req.POST.get('password')
         
-        print(req.POST)
-        
         if '@' in _user_input:
             user = authenticate(req, emial=_user_input, password=_password)
         else:
@@ -27,9 +25,13 @@ class UserLoginView(View):
             message = "Invalid login details, Please try again"
             return render(req, 'userauthentication/userlogin.html', {'message': message})
         else:
+            redirect_url = req.GET.get('redirect_to')
             login(req, user)
-            return HttpResponseRedirect(reverse('main:room_login'))
+            return redirect(redirect_url)
 
+def logout_user(req):
+        logout(req)
+        return HttpResponseRedirect(reverse('userauthentication:login'))
 
 def name_validator(text_data):
     if text_data is None:
