@@ -4,16 +4,6 @@ var room_name = $("input[name='room_name']").val();
 
 const client_socket = new WebSocket('ws://' + window.location.host + '/chat/room/' + room_name + '/')
 
-client_socket.onmessage = (e) => {
-    console.log(e);
-    const data = JSON.parse(e.data);
-
-    if (data.message === 'member added') {
-        
-    }
-    $('.chat-logs').html(data.message)
-}
-
 // it will send username to the server socket, when a connection is made successfully.
 client_socket.addEventListener('open', (e) => {
     var username = $("input[name='username']").val();
@@ -22,6 +12,17 @@ client_socket.addEventListener('open', (e) => {
         JSON.stringify({'username': username})
         );
 })
+
+client_socket.onmessage = (e) => {
+    const data = JSON.parse(e.data);
+    console.log(data);
+    console.log(data.hasOwnProperty('user'));
+
+    if (data.user) {
+        $('.username').html(data.user);
+        $('.notification').css('display', 'block')
+    }
+}
 
 $('.leave-room').on('click', () => {
     client_socket.close();

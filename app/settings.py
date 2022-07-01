@@ -88,7 +88,7 @@ CHANNEL_LAYERS = {
 
 # user authentication
 LOGIN_URL = 'userauthentication:login'
-LOGIN_REDIRECT_URL = 'main:home'
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

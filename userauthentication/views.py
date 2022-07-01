@@ -26,8 +26,12 @@ class UserLoginView(View):
             return render(req, 'userauthentication/userlogin.html', {'message': message})
         else:
             redirect_url = req.GET.get('redirect_to')
+            
             login(req, user)
-            return redirect(redirect_url)
+            if redirect_url != None:
+                return redirect(redirect_url)
+            
+            return redirect('/')
 
 def logout_user(req):
         logout(req)
