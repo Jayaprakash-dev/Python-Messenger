@@ -1,3 +1,4 @@
+import email
 import json
 from html import escape
 
@@ -18,9 +19,17 @@ class ChatRoom(LoginRequiredMixin, View):
     def get(self, req, room_name):
         username = req.user.username.title()
         # username = username[0].upper() + username[1:]
-        username_first = username[0].upper()
+        username_char = username[0].upper()
         
-        return render(req, 'main/main.html', {'room_name': room_name, 'username': username, 'username_first': username_first})
+        email = req.user.email
+        
+        room_name_char = room_name[0].upper()
+        
+        return render(req, 'main/main.html', {'room_name': room_name, 
+                                              'username': username, 
+                                              'username_char': username_char, 
+                                              'roomname_char': room_name_char,
+                                              'email': email })
 
 
 class HomePage(LoginRequiredMixin, View):

@@ -30,7 +30,7 @@
         <div class="container-l" id="container-l">
             <div class="top-section">
                 <div class="user">
-                    <img src="" alt={{username_first}} class="profile-pic" id="profile-pic">
+                    <p class="profile-pic" id="profile-pic">{{username_char}}</p>
                     <div class="user-status"></div>
                 </div>
                 <p class="user-name" id="username">{{username}}</p>
@@ -49,7 +49,7 @@
                     <li class="chat-room">
                         <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
                         <div>
-                            <p class="room-name">Room 1</p>
+                            <p class="room-name">{{room_name}}</p>
                             <p class="members">20 members</p>
                         </div>
                     </li>
@@ -91,7 +91,7 @@
             </div>
             <ul class="chat-room-members">
                 <li>
-                    <img src="" alt="P" class="profile-pic">
+                    <p class="profile-pic">P</P>
                     <div>
                         <p class="user-name">User Name</p>
                         <p class="time">joined 20mins ago</p>
@@ -131,8 +131,8 @@
         <div class="container-r">
             <div class="top-section">
                 <div class="inner-section-l">
-                    <img src="" alt="G">
-                    <p class="name">Room 1</p>
+                    <img src="" alt={{roomname_char}}>
+                    <p class="name">{{room_name}}</p>
                     <p class="time">Created 20 mins ago</p>
                 </div>
                 <div class="inner-section-r">
@@ -153,11 +153,11 @@
         </div>
 
         <div class="notification" style="display: none;">
-            <p class="username">Jhon Wick</p>
+            <p class="notification-username"></p>
             <p class="msg">A new member added in the group</p>
 
             <div class="action-btns">
-                <button class="ok-btn" onclick="$('.notification').css('display', 'none')">Ok</button>
+                <button class="ok-btn">Ok</button>
                 <button class="remove-btn">Remove</button>
             </div>
         </div>
