@@ -49,6 +49,8 @@ html
     width: 100%
 
 .main-container
+    position: relative
+    left: 8%
     display: flex
     flex-direction: row
     height: 100%
@@ -142,9 +144,10 @@ html
                     @include subText()
                     
     .container-m
-        min-width: 16%
-        max-width: 16%
+        min-width: 17%
+        max-width: 17%
         height: 100%
+        border-left: 2px solid #EEEEF1
         background-color: white
 
         .top-section
@@ -158,7 +161,7 @@ html
                 font-family: $monsterrat
                 font-weight: 500
                 font-size: 20px
-        
+
         .chat-room-members
             margin-top: 4%
             list-style: none
@@ -169,8 +172,8 @@ html
                 flex-direction: row
                 padding-left: 7%
                 padding-top: 3%
-                padding-bottom: 3%
-                // border-bottom: 2px solid #ededed
+                padding-bottom: 15px
+                border-bottom: 2px solid #ededed
 
                 .profile-pic
                     @include userProfile()
@@ -186,6 +189,24 @@ html
 
                     .time
                         @include subText()
+
+                    &:hover
+                        cursor: pointer
+                
+                button
+                    margin-top: 20px
+                    height: 30px
+                    font-weight: 500
+                    text-align: center
+                    width: 90%
+                    background-color: black
+                    color: white
+                    border: none
+                    border-radius: 4px
+                    display: none
+
+                    &:hover
+                        cursor: pointer
 
     .container-r
         min-width: 100-33%
@@ -260,7 +281,38 @@ html
         .chat-logs
             width: 100%
             height: 77%
+            overflow-y: scroll
+            overflow-x: hidden
+            scrollbar-width: none
+            scrollbar-color: white
             border-bottom: 2px solid #ededed
+            padding: 1.5% 1.5% 
+
+            .chat-msg
+                display: block
+                position: relative
+                left: 0%
+                min-width: 425px
+                max-width: 525px
+                border-radius: 20px
+                padding: 0.5% 1.5%
+                background-color: #a4caee
+                margin-bottom: 15px
+
+                .username
+                    font-weight: 600
+                    margin-bottom: 10px
+                    color: white
+
+                .time
+                    width: fit-content
+                    margin-top: 8px
+                    position: relative
+                    left: 83%
+                    bottom: 6px
+                    font-size: 0.9em
+                    font-weight: 600
+                    color: white
         
         .chat-section
             position: relative
@@ -292,55 +344,50 @@ html
                     height: 35px
                     bottom: 20px
                     right: 20px
-    
-    .notification
+
+    .notification-section
         position: absolute
-        width: 25%
+        top: 7%
+        right: 15%
+        width: 250px
         height: fit-content
-        top: 20%
-        left: 50%
-        transform: translateX(-50%)
-        background-color: white
-        -webkit-box-shadow: 17px 17px 68px -6px rgba(135,124,135,0.8)
-        -moz-box-shadow: 17px 17px 68px -6px rgba(135,124,135,0.8)
-        box-shadow: 17px 17px 68px -6px rgba(135,124,135,0.8)
         border: none
-        border-radius: 10px
-        text-align: center
-        padding-top: 25px 
+        border-radius: 5px
+        background-color: white
+        display: none
 
-        .username
-            font-size: 2em
-            color: black
-            font-weight: 600
-            margin-bottom: 10px
-            font-family: $monsterrat
-        
-        .msg
-            color: #6d6969
-            font-weight: 600
-            margin-bottom: 25px
+        -webkit-box-shadow: 14px 14px 22px 0px rgba(0,0,0,0.22)
+        -moz-box-shadow: 14px 14px 22px 0px rgba(0,0,0,0.22)
+        box-shadow: 14px 14px 22px 0px rgba(0,0,0,0.22)
 
-        .action-btns
-            display: flex
-            flex-direction: column
-            margin: 30px 0 17px
+        .notification
+            background-color: white
+            padding-top: 10px
+            padding-bottom: 8px
+            padding-right: 15px 
+            padding-left: 30px
+            border-bottom: 2px solid #ededed
 
-            .ok-btn, .remove-btn
-                font-weight: 600
-                font-size: 1.1em
-                background-color: black
-                color: white
-                margin-bottom: 15px
-                position: relative
-                left: 50%
-                transform: translateX(-50%)
-                width: 35%
-                height: 45px
-                border: none
-                border-radius: 5px
-                transition: 0.2s ease-out
+            .notification-username span
+                font-weight: 500
+                font-size: 1.05em
 
-                &:hover
-                    cursor: pointer
-                    background-color: #000000ad
+            .notification-btns
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                padding-bottom: 5px
+
+                .ok-btn, .remove-btn
+                    margin-top: 20px
+                    height: 30px
+                    font-weight: 500
+                    text-align: center
+                    width: 45%
+                    background-color: black
+                    color: white
+                    border: none
+                    border-radius: 4px
+
+                    &:hover
+                        cursor: pointer

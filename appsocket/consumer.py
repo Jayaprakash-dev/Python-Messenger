@@ -28,21 +28,23 @@ class Consumer(AsyncWebsocketConsumer):
             if key.decode() == self.room_name:
 
                 if rc.hget(self.room_name, 'host') is None:
-                    rc.hset(key.decode(), 'host', self.channel_name)
+                    rc.hset(key.decode(), 'host', self.username)
+                    rc.hset(key.decode(), self.username, self.channel_name)
 
                 else:
                     rc.hset(key.decode(), self.username, self.channel_name)
-                    
-                    host_channel = rc.hget(self.room_name, 'host').decode()
+
+                    host = rc.hget(self.room_name, 'host').decode()
+                    host_channel = rc.hget(key.decode(), host).decode()
+                    print(self.username)
                     
                     await self.channel_layer.send(host_channel, {
                         'type': 'notification',
                         'user': self.username
                     })
-                    
-                    # print(rc.hgetall(self.room_name))
             
     async def receive(self, text_data=None):
+        loop = asyncio.get_running_loop()
         
         if text_data != None:
             text_data = json.loads(text_data)
@@ -51,8 +53,8 @@ class Consumer(AsyncWebsocketConsumer):
                 if text_data.get('username'):
                     self.username = text_data.get('username')
                     
-                    loop = asyncio.get_running_loop()
                     await loop.create_task(self.set_room())
+
                     # response, count, room_name = await loop.create_task(set_room(self.room_name, self.channel_name, self))
             
                     # if response == 'member added':
@@ -61,11 +63,37 @@ class Consumer(AsyncWebsocketConsumer):
                     #         'type': 'notification',
                     #         'message': 'member ' + count + ' added'
                     #     })
+                    
                 elif text_data.get('ru'):
-                    await Consumer.remove_user(self.room_name, text_data.get('ru'), self.channel_name)
+                    username = text_data.get('ru')
+                    
+                    await loop.create_task(Consumer.remove_user(self.room_name, username, self.channel_name)) 
                 
-            except KeyError:
-                pass
+                elif text_data.get('cu'):
+                    username = text_data.get('cu')
+                    
+                    await loop.create_task(self.channel_layer.group_send(
+                        self.room_name,
+                        {
+                            'type': 'confirm_user',
+                            'user': username
+                        }
+                    ))
+                    
+                elif text_data.get('message'):
+                    message = text_data.get('message')
+                    username = text_data.get('username')
+                    
+                    await loop.create_task(self.channel_layer.group_send(
+                        self.room_name,
+                        {
+                            'type': 'chat_message',
+                            'message': message
+                        }
+                    ))
+                
+            except Exception as e:
+                print(e)
         
 
     async def disconnect(self, close_code):
@@ -75,23 +103,27 @@ class Consumer(AsyncWebsocketConsumer):
     async def notification(self, event):
         
         username = event.get('user')
-        print('sending message')
+
+        await self.send(text_data=json.dumps({
+            'au': username # au - add user
+        }))
+    
+    async def chat_message(self, event):
         
         await self.send(text_data=json.dumps({
-            'user': username
+            'message':  event.get('message')
+        }))
+        
+    async def confirm_user(self, event):
+        await self.send(text_data=json.dumps({
+            'add_user':  event.get('user')
         }))
 
     @staticmethod
     async def remove_user(room_name, username, channel_name):
         
-        res = rc.hdel(room_name, username)
+        rc.hdel(room_name, username)
         
-        if res == 0:
-            host_channel = rc.hget(room_name, 'host').decode()
-
-            if host_channel == channel_name:
-                rc.hdel(room_name, 'host')
-        
-        if rc.hlen(room_name) == 1:
+        if rc.hlen(room_name) == 2:
             rc.delete(room_name)
         

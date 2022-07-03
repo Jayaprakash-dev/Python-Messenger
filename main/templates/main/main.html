@@ -27,7 +27,9 @@
     
     <div class="main-container">
 
-        <div class="container-l" id="container-l">
+        <div class="notification-section"></div>
+
+        <!-- <div class="container-l" id="container-l">
             <div class="top-section">
                 <div class="user">
                     <p class="profile-pic" id="profile-pic">{{username_char}}</p>
@@ -36,14 +38,14 @@
                 <p class="user-name" id="username">{{username}}</p>
                 <div class="utils-btns">
                     <img src="{% static 'assets/Refresh.svg' %}" alt="" class="icon-btn" onclick="refresh()">
-                    <!-- <img src="./static/assets/back.svg" alt="" class="icon-btn" onclick="closePane()"> -->
-                </div>
-            </div>
+                    <-- <img src="./static/assets/back.svg" alt="" class="icon-btn" onclick="closePane()"> -->
+                <!-- </div>
+            </div> -->
 
             <input type='hidden' value={{room_name}} name="room_name">
             <input type='hidden' value={{username}} name="username">
 
-            <div class="chat-rooms-section">
+            <!-- <div class="chat-rooms-section">
                 <p class="chat-rooms-txt">Chat rooms</p>
                 <ul class="chat-rooms-list">
                     <li class="chat-room">
@@ -83,48 +85,14 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>  -->
 
         <div class="container-m">
             <div class="top-section">
                 <p class="name">Your chat room</p>
             </div>
             <ul class="chat-room-members">
-                <li>
-                    <p class="profile-pic">P</P>
-                    <div>
-                        <p class="user-name">User Name</p>
-                        <p class="time">joined 20mins ago</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="" alt="P" class="profile-pic">
-                    <div>
-                        <p class="user-name">User Name</p>
-                        <p class="time">joined 20mins ago</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="" alt="P" class="profile-pic">
-                    <div>
-                        <p class="user-name">User Name</p>
-                        <p class="time">joined 20mins ago</p>
-                    </div>
-                </li>
-                <li >
-                    <img src="" alt="P" class="profile-pic">
-                    <div>
-                        <p class="user-name">User Name</p>
-                        <p class="time">joined 20mins ago</p>
-                    </div>
-                </li>
-                <li >
-                    <img src="" alt="P" class="profile-pic">
-                    <div>
-                        <p class="user-name">User Name</p>
-                        <p class="time">joined 20mins ago</p>
-                    </div>
-                </li>
+
             </ul>
         </div>
 
@@ -136,33 +104,34 @@
                     <p class="time">Created 20 mins ago</p>
                 </div>
                 <div class="inner-section-r">
-                    <image class="icon" src="/static/assets/notification.svg"></image>
+                    <image class="icon" onclick="showNotification()" src="/static/assets/notification.svg"></image>
                     <button class="leave-room">Leave</button>
                 </div>
             </div>
             <div class="chat-logs">
-                <p class="name"></p>
-                <div class="msg"></div>
+                
             </div>
+
             <div class="chat-section">
                 <div class="inner-section">
-                    <textarea name="message-txt" id="" cols="30" rows="10" class="textarea"></textarea>
-                    <img style="position: absolute;" class="icon-btn" src="{% static 'assets/Send.svg' %}">
+                    <textarea name="message-txt" cols="30" rows="10" id="chat-msg-input" class="textarea"></textarea>
+                    <img style="position: absolute;" id="submit-btn" class="icon-btn" src="{% static 'assets/Send.svg' %}">
                 </div>
-            </div>
-        </div>
-
-        <div class="notification" style="display: none;">
-            <p class="notification-username"></p>
-            <p class="msg">A new member added in the group</p>
-
-            <div class="action-btns">
-                <button class="ok-btn">Ok</button>
-                <button class="remove-btn">Remove</button>
             </div>
         </div>
     </div>
 
     <script src="/static/js/chatroomhandler.js"></script>
+
+    <script>
+        function showNotification() {
+
+            if ($('.notification-section').css('display') === 'none') {
+                $('.notification-section').css('display', 'block');
+            } else {
+                $('.notification-section').css('display', 'none');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -27,3 +27,6 @@
 # {b'Jayaprakash_07': b'specific.df772381e1cc4fffbcb73134445c67f4!526d50a948134098a3d30bb8afc593b9', 
 # b'password': b'1234', 
 # b'host': b'specific.df772381e1cc4fffbcb73134445c67f4!8cd6112426224167859f7f1d92e68e4d'}
+
+
+# { chatmessage : [username, message]}

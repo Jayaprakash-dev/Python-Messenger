@@ -13,6 +13,8 @@ html body {
 }
 
 .main-container {
+  position: relative;
+  left: 8%;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -136,9 +138,10 @@ html body {
   width: 100%;
 }
 .main-container .container-m {
-  min-width: 16%;
-  max-width: 16%;
+  min-width: 17%;
+  max-width: 17%;
   height: 100%;
+  border-left: 2px solid #EEEEF1;
   background-color: white;
 }
 .main-container .container-m .top-section {
@@ -170,7 +173,8 @@ html body {
   flex-direction: row;
   padding-left: 7%;
   padding-top: 3%;
-  padding-bottom: 3%;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ededed;
 }
 .main-container .container-m .chat-room-members li .profile-pic {
   position: relative;
@@ -196,6 +200,24 @@ html body {
   color: #534c4c;
   font-weight: 500;
   width: 100%;
+}
+.main-container .container-m .chat-room-members li div:hover {
+  cursor: pointer;
+}
+.main-container .container-m .chat-room-members li button {
+  margin-top: 20px;
+  height: 30px;
+  font-weight: 500;
+  text-align: center;
+  width: 90%;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  display: none;
+}
+.main-container .container-m .chat-room-members li button:hover {
+  cursor: pointer;
 }
 .main-container .container-r {
   min-width: 67%;
@@ -282,7 +304,39 @@ html body {
 .main-container .container-r .chat-logs {
   width: 100%;
   height: 77%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  scrollbar-color: white;
   border-bottom: 2px solid #ededed;
+  padding: 1.5% 1.5%;
+}
+.main-container .container-r .chat-logs .chat-msg {
+  position: relative;
+  left: 0%;
+  min-width: 425px;
+  max-width: 525px;
+  border-radius: 20px;
+  padding: 0.5% 1.5%;
+  background-color: #a4caee;
+  margin-bottom: 15px;
+}
+.main-container .container-r .chat-logs .chat-msg .username {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: white;
+}
+.main-container .container-r .chat-logs .chat-msg .time {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 8px;
+  position: relative;
+  left: 83%;
+  bottom: 6px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
 }
 .main-container .container-r .chat-section {
   position: relative;
@@ -324,55 +378,49 @@ html body {
   border: none;
   border-radius: 50%;
 }
-.main-container .notification {
+.main-container .notification-section {
   position: absolute;
-  width: 25%;
+  top: 7%;
+  right: 15%;
+  width: 250px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
-  box-shadow: 17px 17px 68px -6px rgba(135, 124, 135, 0.8);
-  border: none;
-  border-radius: 10px;
-  text-align: center;
-  padding-top: 25px;
-}
-.main-container .notification .username {
-  font-size: 2em;
-  color: black;
-  font-weight: 600;
-  margin-bottom: 10px;
-  font-family: "Montserrat", sans-serif;
-}
-.main-container .notification .msg {
-  color: #6d6969;
-  font-weight: 600;
-  margin-bottom: 25px;
-}
-.main-container .notification .action-btns {
-  display: flex;
-  flex-direction: column;
-  margin: 30px 0 17px;
-}
-.main-container .notification .action-btns .ok-btn, .main-container .notification .action-btns .remove-btn {
-  font-weight: 600;
-  font-size: 1.1em;
-  background-color: black;
-  color: white;
-  margin-bottom: 15px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 35%;
-  height: 45px;
   border: none;
   border-radius: 5px;
-  transition: 0.2s ease-out;
+  background-color: white;
+  display: none;
+  box-shadow: 14px 14px 22px 0px rgba(0, 0, 0, 0.22);
 }
-.main-container .notification .action-btns .ok-btn:hover, .main-container .notification .action-btns .remove-btn:hover {
+.main-container .notification-section .notification {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  padding-right: 15px;
+  padding-left: 30px;
+  border-bottom: 2px solid #ededed;
+}
+.main-container .notification-section .notification .notification-username span {
+  font-weight: 500;
+  font-size: 1.05em;
+}
+.main-container .notification-section .notification .notification-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+.main-container .notification-section .notification .notification-btns .ok-btn, .main-container .notification-section .notification .notification-btns .remove-btn {
+  margin-top: 20px;
+  height: 30px;
+  font-weight: 500;
+  text-align: center;
+  width: 45%;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.main-container .notification-section .notification .notification-btns .ok-btn:hover, .main-container .notification-section .notification .notification-btns .remove-btn:hover {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.6784313725);
 }/*# sourceMappingURL=main.css.map */

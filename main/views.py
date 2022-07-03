@@ -22,14 +22,18 @@ class ChatRoom(LoginRequiredMixin, View):
         username_char = username[0].upper()
         
         email = req.user.email
-        
         room_name_char = room_name[0].upper()
+        
+        is_host = ''
+        if req.session.get('is_host'):
+            is_host = 'true'
         
         return render(req, 'main/main.html', {'room_name': room_name, 
                                               'username': username, 
                                               'username_char': username_char, 
                                               'roomname_char': room_name_char,
-                                              'email': email })
+                                              'email': email,
+                                              'is_host': is_host})
 
 
 class HomePage(LoginRequiredMixin, View):
@@ -68,4 +72,5 @@ class HomePage(LoginRequiredMixin, View):
                     return render(req, 'main/home.html', {'message': 'specified room is not available, Invalid room_name' })
 
         redis_client.hset(room_name, 'password', password)
+        req.session['is_host'] = True
         return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_name': room_name}))
