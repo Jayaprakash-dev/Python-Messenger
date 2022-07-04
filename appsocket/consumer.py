@@ -16,8 +16,6 @@ class Consumer(AsyncWebsocketConsumer):
          
         self.room_name = self.scope['url_route']['kwargs']['room_name']
 
-        print('room_id: ', self.room_name)
-
         await self.channel_layer.group_add(self.room_name, self.channel_name)
 
         await self.accept()
@@ -30,13 +28,16 @@ class Consumer(AsyncWebsocketConsumer):
                 if rc.hget(self.room_name, 'host') is None:
                     rc.hset(key.decode(), 'host', self.username)
                     rc.hset(key.decode(), self.username, self.channel_name)
+                    
+                    await self.send(text_data=json.dumps({
+                            'is_host':  True
+                        }))
 
                 else:
                     rc.hset(key.decode(), self.username, self.channel_name)
 
                     host = rc.hget(self.room_name, 'host').decode()
                     host_channel = rc.hget(key.decode(), host).decode()
-                    print(self.username)
                     
                     await self.channel_layer.send(host_channel, {
                         'type': 'notification',
@@ -67,10 +68,18 @@ class Consumer(AsyncWebsocketConsumer):
                 elif text_data.get('ru'):
                     username = text_data.get('ru')
                     
-                    await loop.create_task(Consumer.remove_user(self.room_name, username, self.channel_name)) 
+                    if rc.hlen(self.room_name) > 3:
+                        await loop.create_task(self.channel_layer.group_send(self.room_name,
+                            {
+                                'type': 'remove_user',
+                                'user': username
+                            }
+                        ))
+                        
+                    await loop.create_task(Consumer.redis_remove_user(self.room_name, username)) 
                 
-                elif text_data.get('cu'):
-                    username = text_data.get('cu')
+                elif text_data.get('req_to_au'):
+                    username = text_data.get('req_to_au')
                     
                     await loop.create_task(self.channel_layer.group_send(
                         self.room_name,
@@ -105,7 +114,7 @@ class Consumer(AsyncWebsocketConsumer):
         username = event.get('user')
 
         await self.send(text_data=json.dumps({
-            'au': username # au - add user
+            'notification': username # au - add user
         }))
     
     async def chat_message(self, event):
@@ -120,10 +129,16 @@ class Consumer(AsyncWebsocketConsumer):
         }))
 
     @staticmethod
-    async def remove_user(room_name, username, channel_name):
-        
+    async def redis_remove_user(room_name, username):
+
         rc.hdel(room_name, username)
         
         if rc.hlen(room_name) == 2:
             rc.delete(room_name)
+    
+    async def remove_user(self, event):
+
+        await self.send(text_data=json.dumps({
+            'remove_user':  event.get('user')
+        }))
         

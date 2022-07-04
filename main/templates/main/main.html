@@ -1,137 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {% load static %}
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 
-    <!-- css -->
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<!-- Bootstrap CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
-    <!-- google fonts -->
+	<!-- jquery CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet"> 
-   
-    <!-- jquery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			crossorigin="anonymous">
-    </script>
-    
-    <title>Pyhon Messenger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+	
+    <title>Python Messenger</title>
 </head>
 <body>
-    
-    <div class="main-container">
 
-        <div class="notification-section"></div>
+	<div class="container-fluid" id="main-container">
 
-        <!-- <div class="container-l" id="container-l">
-            <div class="top-section">
-                <div class="user">
-                    <p class="profile-pic" id="profile-pic">{{username_char}}</p>
-                    <div class="user-status"></div>
-                </div>
-                <p class="user-name" id="username">{{username}}</p>
-                <div class="utils-btns">
-                    <img src="{% static 'assets/Refresh.svg' %}" alt="" class="icon-btn" onclick="refresh()">
-                    <-- <img src="./static/assets/back.svg" alt="" class="icon-btn" onclick="closePane()"> -->
-                <!-- </div>
-            </div> -->
+		<div class="row">
 
-            <input type='hidden' value={{room_name}} name="room_name">
-            <input type='hidden' value={{username}} name="username">
+			<!-- left side container -->
+			<div class="col-3 mt-1 con-l pe-0">
+				<div class="list-group">
 
-            <!-- <div class="chat-rooms-section">
-                <p class="chat-rooms-txt">Chat rooms</p>
-                <ul class="chat-rooms-list">
-                    <li class="chat-room">
-                        <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
-                        <div>
-                            <p class="room-name">{{room_name}}</p>
-                            <p class="members">20 members</p>
-                        </div>
-                    </li>
-                    <li class="chat-room">
-                        <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
-                        <div>
-                            <p class="room-name">Room 2</p>
-                            <p class="members">2 members</p>
-                        </div>
-                    </li>
-                     <li class="chat-room">
-                        <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
-                        <div>
-                            <p class="room-name">Room 3</p>
-                            <p class="members">10 members</p>
-                        </div>
-                    </li>
-                    <li class="chat-room">
-                        <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
-                        <div>
-                            <p class="room-name">Room 4</p>
-                            <p class="members">7 members</p>
-                        </div>
-                    </li>
-                    <li class="chat-room">
-                        <img src="{% static 'assets/Chat.svg' %}" alt="" class="icon">
-                        <div>
-                            <p class="room-name">Room 5</p>
-                            <p class="members">8 members</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>  -->
+					<!-- header -->
+					<div class="fixed">
+						<nav class="navbar rounded-top bg-dark bg-light">
+							<div class="container-fluid">
+							  <span class="navbar-brand mb-0 h1 text-white">Room Members</span>
+							</div>
+						</nav>
+					</div>
 
-        <div class="container-m">
-            <div class="top-section">
-                <p class="name">Your chat room</p>
-            </div>
-            <ul class="chat-room-members">
+                    <input type="hidden" name="username" value={{username}}>
+                    <input type="hidden" name="room_name" value={{room_name}}>
 
-            </ul>
-        </div>
+					<!-- list of participants or members in the chat room -->
+					
+				</div>
+			</div>
 
-        <div class="container-r">
-            <div class="top-section">
-                <div class="inner-section-l">
-                    <img src="" alt={{roomname_char}}>
-                    <p class="name">{{room_name}}</p>
-                    <p class="time">Created 20 mins ago</p>
-                </div>
-                <div class="inner-section-r">
-                    <image class="icon" onclick="showNotification()" src="/static/assets/notification.svg"></image>
-                    <button class="leave-room">Leave</button>
-                </div>
-            </div>
-            <div class="chat-logs">
+			<!-- right side container -->
+			<div class="col-9 con-r ps-0">
+
+				<!-- header -->
+				<div class="fixed-l">
+					<nav class="navbar rounded-top bg-light .bg-light.bg-gradient d-flex flex-row">
+						<div class="container-fluid">
+						  <span class="navbar-brand mb-0 h1 text-black fw-semibold ms-4" style="width: fit-content;">Room Name</span>
                 
-            </div>
+						  <div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle bg-light" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+									<img src="/static/assets/app-indicator.svg" type="button" alt="">
+								</button>
 
-            <div class="chat-section">
-                <div class="inner-section">
-                    <textarea name="message-txt" cols="30" rows="10" id="chat-msg-input" class="textarea"></textarea>
-                    <img style="position: absolute;" id="submit-btn" class="icon-btn" src="{% static 'assets/Send.svg' %}">
-                </div>
-            </div>
-        </div>
-    </div>
+								<ul class="dropdown-menu  dropdown-menu-dark notification-section" id="dropdown" aria-labelledby="dropdownMenuButton1">
+									
+								</ul>
+						  </div>
+
+						  <button class="btn btn-danger btn-sm me-2 leave-room fw-semibold">Leave</button>
+						</div>
+					</nav>
+				</div>
+
+				<!-- message logs -->
+				<div class="chat-logs ps-2 pt-2">
+
+					<div class="chat-msg bg-primary ms-2">
+						<p class="messenger-name fw-semibold">Username</p>
+
+						<p class="msg text-white ps-2 pe-1">
+							To hide the scrollbar use -webkit-
+						</p>
+							
+						<p class="msg-time">12:10 PM</p>
+					</div>
+
+					<div class="chat-msg-user bg-primary ms-2">
+						<p class="messenger-name fw-semibold">User</p>
+
+						<p class="msg text-white ps-2 pe-1">
+							To hide the scrollbar use -webkit-
+						</p>
+							
+						<p class="msg-time">12:10 PM</p>
+					</div>
+
+					<div class="chat-msg bg-primary ms-2">
+						<p class="messenger-name fw-semibold">Username</p>
+
+						<p class="msg text-white ps-2 pe-1">
+							To hide the scrollbar use -webkit-
+						</p>
+							
+						<p class="msg-time">12:10 PM</p>
+					</div>
+				</div>
+
+				<!-- message input section -->
+				<div class="chat-section d-flex flex-row rounded-bottom">
+					<div class="msg-area me-4 ms-4">
+						<textarea class="form-control" name="msg-input" id="" cols="30" rows="10"></textarea>
+					</div>
+
+					<button class="btn btn-primary btn-sm fw-semibold">send</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
     <script src="/static/js/chatroomhandler.js"></script>
-
-    <script>
-        function showNotification() {
-
-            if ($('.notification-section').css('display') === 'none') {
-                $('.notification-section').css('display', 'block');
-            } else {
-                $('.notification-section').css('display', 'none');
-            }
-        }
-    </script>
 </body>
 </html>
