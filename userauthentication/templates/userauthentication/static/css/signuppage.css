@@ -157,8 +157,50 @@ html body {
     margin-bottom: 50px;
     text-align: center;
   }
-  .container .signup-form .col {
-    margin-bottom: 15px;
+  .container .signup-form .status {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .container .signup-form #username-section, .container .signup-form #email-section {
+    margin-top: 15px;
+  }
+  .container .signup-form #password-section {
+    margin-top: 15px;
+  }
+  .container .signup-form .row #name-status-msg, .container .signup-form #username-status-msg, .container .signup-form #email-status-msg {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #E24032;
+    position: relative;
+    top: 7px;
+    display: none;
+  }
+  .container .signup-form .status-icon {
+    width: 22px;
+    display: none;
+  }
+  .container .signup-form #password-section {
+    position: relative;
+  }
+  .container .signup-form #password-section .pass-show-btn {
+    position: absolute;
+    top: 50%;
+    left: 48.5%;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+  }
+  .container .signup-form #password-section .pass-show-btn:hover {
+    cursor: pointer;
+  }
+  .container .signup-form .messages {
+    margin-top: 5px;
+    padding-left: 5px;
   }
   .container .signup-form .messages .row {
     display: flex;
@@ -168,7 +210,9 @@ html body {
     height: fit-content;
   }
   .container .signup-form .messages .row .icon {
-    width: 45px;
+    width: 42px;
+    margin-top: -5px;
+    margin-left: -17px;
     display: inline-block;
   }
   .container .signup-form .messages .row p {
@@ -177,10 +221,11 @@ html body {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 500;
     color: #E24032;
     float: right;
+    font-weight: 600;
   }
   .container .signup-form .btn {
     width: 100%;

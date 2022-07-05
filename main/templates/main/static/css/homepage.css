@@ -107,4 +107,42 @@ body {
   color: #E24032;
   font-size: 1em;
   letter-spacing: 0.04em;
+}
+
+@media screen and (max-width: 550px) {
+  .main-container {
+    height: 100%;
+  }
+
+  .logo {
+    border: none;
+  }
+
+  .username {
+    margin-left: 15px !important;
+  }
+
+  .logout-btn {
+    position: absolute;
+    width: 130px;
+    font-weight: 600;
+    top: 10.6vh;
+    right: 10px;
+  }
+
+  .action-btns {
+    top: 20% !important;
+    text-align: center;
+    left: 0% !important;
+    transform: translateX(0%) !important;
+  }
+
+  #join {
+    margin-left: 0 !important;
+    margin-top: 30px;
+  }
+
+  .message {
+    top: 35% !important;
+  }
 }/*# sourceMappingURL=homepage.css.map */

@@ -21,6 +21,10 @@ body {
   width: 100%;
 }
 
+.close-icon {
+  display: none;
+}
+
 .con-r {
   margin-top: 0;
   margin-left: 0;
@@ -222,4 +226,242 @@ body {
   color: black;
   font-weight: 500;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 550px) {
+  body, html {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .row {
+    height: 100vh;
+  }
+
+  .fixed, .fixed-l {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    bottom: 0;
+    z-index: 2;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 100%;
+  }
+
+  .con-r {
+    position: relative;
+    top: 0;
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
+    padding-right: 0;
+    min-width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  .con-r .fixed-l {
+    top: 0px;
+    border-bottom: 2px solid #dbdbdb;
+  }
+  .con-r .fixed-l .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: none;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+  .con-r .fixed-l #dropdown {
+    position: absolute;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .con-r .fixed-l #dropdown .dropdown-btn {
+    background-color: white;
+    display: none;
+  }
+  .con-r .fixed-l #dropdown .newly-joined-member {
+    margin: 0;
+  }
+  .con-r .fixed-l #dropdown .ok-btn, .con-r .fixed-l #dropdown .remove-btn {
+    width: 100px;
+  }
+  .con-r .chat-logs {
+    position: relative;
+    height: 82%;
+    max-width: 100%;
+    background-color: #ffffff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border-left: 0.5px solid #ededed;
+    border-right: 1px solid #ededed;
+  }
+  .con-r .chat-logs::-webkit-scrollbar {
+    display: none;
+  }
+  .con-r .chat-logs .chat-msg, .con-r .chat-logs .chat-msg-user {
+    position: relative;
+    margin-left: 0 !important;
+    display: block;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin-top: 26px;
+    font-weight: 500;
+    font-size: 0.88em;
+    border-top-left-radius: 0;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+  .con-r .chat-logs .chat-msg-user {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 0px;
+    padding-left: 15px;
+    padding-top: 5px;
+    left: 23%;
+    margin-top: 35px;
+  }
+  .con-r .chat-logs .messenger-name {
+    font-weight: 600;
+    font-size: 0.85em;
+    color: #fcfafa;
+    position: relative;
+    padding: 0 0 0 7px;
+    margin: 0;
+    top: 4.6px;
+  }
+  .con-r .chat-logs .msg {
+    position: relative;
+    left: 0;
+    margin: 0 15px 0 8px;
+    max-width: 100%;
+    text-align: left;
+    padding: 8px 0;
+  }
+  .con-r .chat-logs .msg-time {
+    font-weight: 600;
+    font-size: 0.8em;
+    color: rgba(100, 100, 100, 0.8470588235);
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: -23px;
+    right: 0px;
+  }
+  .con-r .chat-logs .msg-time {
+    right: 0px;
+  }
+  .con-r .leave-btn {
+    width: 120px;
+  }
+  .con-r .chat-section {
+    width: 100%;
+    height: 100px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #ededed;
+    border-top: 2px solid #dbdbdb;
+    padding-right: 7px;
+  }
+  .con-r .chat-section .msg-area {
+    width: 90%;
+  }
+  .con-r .chat-section .msg-area textarea {
+    min-height: 50%;
+    max-height: 70%;
+    resize: none;
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .con-r .chat-section .msg-area textarea::-webkit-scrollbar {
+    display: none;
+  }
+  .con-r .chat-section button {
+    position: relative;
+    width: 120px;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+
+  .close-icon {
+    position: relative;
+    display: block;
+    left: 90%;
+    bottom: 20px;
+  }
+
+  .con-l {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-right: 0;
+    padding-right: 0;
+    height: 917px;
+    min-width: 100%;
+    position: absolute;
+    display: none;
+  }
+  .con-l::-webkit-scrollbar {
+    display: none;
+  }
+  .con-l .remove-user {
+    width: 110px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-top: 7px;
+  }
+  .con-l .list-group-item .user-pic .pic {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-60%);
+    padding-top: 5.5px;
+    font-size: 1.3em;
+    font-family: "Secular One", sans-serif;
+    font-weight: 500;
+  }
+  .con-l .list-group-item .user-pic .room-members-name {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    text-align: center;
+  }
+
+  .name-pic {
+    background-color: #ededed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    color: black;
+    font-weight: 500;
+    margin-top: 10px;
+  }
 }/*# sourceMappingURL=main.css.map */

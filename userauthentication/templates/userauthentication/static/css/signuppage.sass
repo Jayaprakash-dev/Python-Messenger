@@ -144,28 +144,68 @@ html
                 font-size: 3.2em
                 margin-bottom: 50px
                 text-align: center
-
-            .col
-                margin-bottom: 15px
             
+            .status
+                display: flex
+                flex-direction: row
+                margin-left: 5px
+                height: fit-content
+            
+            #username-section, #email-section
+                margin-top: 15px
+
+            #password-section
+                margin-top: 15px
+            
+            .row #name-status-msg,  #username-status-msg, #email-status-msg
+                margin-left: 8px
+                font-weight: 600
+                font-size: 0.8em
+                color: #E24032
+                position: relative
+                top: 7px
+                display: none
+            
+            .status-icon
+                width: 22px
+                display: none
+            
+            #password-section
+                position: relative
+                .pass-show-btn
+                    position: absolute
+                    top: 50%
+                    left: 48.5%
+                    transform: translateY(-50%)
+                    width: 17px
+                    height: 17px
+
+                    &:hover
+                        cursor: pointer
+
             .messages
+                margin-top: 5px
+                padding-left: 5px 
                 .row
                     display: flex
                     flex-direction: row
                     height: fit-content
 
                     .icon
-                        width: 45px
+                        width: 42px
+                        margin-top: -5px
+                        margin-left: -17px
                         display: inline-block
                     
                     p
                         padding-top: 2%
                         text-align: left
                         width: fit-content
-                        font-size: 0.9em
+                        font-size: 0.8em
                         font-weight: 500
                         color: #E24032
                         float: right
+                        font-weight: 600
             
             .btn
                 width: 100%

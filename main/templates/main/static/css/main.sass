@@ -15,6 +15,9 @@ body
     height: fit-content
     width: 100%
 
+.close-icon
+    display: none
+
 .con-r
     margin-top: 0 
     margin-left: 0
@@ -205,3 +208,223 @@ body
     font-weight: 500
     margin-top: 10px
 
+@media screen and (max-width: 550px)
+    body, html
+        height: 100vh
+        overflow: hidden
+
+    .row
+        height: 100vh
+
+    .fixed, .fixed-l
+        position: sticky
+        top: 0px
+        bottom: 0
+        z-index: 2
+        height: fit-content
+        width: 100%
+
+    .con-r
+        position: relative
+        top: 0
+        margin-top: 0 
+        margin: 0
+        padding: 0
+        padding-right: 0 
+        min-width: 100%
+        height: 100%
+        z-index: 2
+
+        .fixed-l
+            top: 0px
+            border-bottom: 2px solid #dbdbdb
+
+            .dropdown-toggle::after 
+                    display: inline-block
+                    margin-left: 0.255em
+                    vertical-align: 0.255em
+                    content: none
+                    border-top: 0.3em solid
+                    border-right: 0.3em solid transparent
+                    border-bottom: 0
+                    border-left: 0.3em solid transparent
+
+            #dropdown
+                position: absolute
+                width: fit-content
+
+                .dropdown-btn
+                    background-color: white
+                    display: none
+
+                .newly-joined-member
+                    margin: 0
+
+                .ok-btn, .remove-btn
+                    width: 100px
+
+        .chat-logs
+            position: relative
+            height: 82%
+            max-width: 100%
+            background-color: #ffffff
+            overflow-y: scroll
+            overflow-x: hidden
+            -ms-overflow-style: none
+            scrollbar-width: none
+            border-left: 0.5px solid #ededed
+            border-right: 1px solid #ededed
+
+            &::-webkit-scrollbar 
+                display: none
+            
+            .chat-msg, .chat-msg-user
+                position: relative
+                margin-left: 0 !important
+                display: block
+                height: fit-content
+                max-width: fit-content
+                margin-top: 26px
+                font-weight: 500
+                font-size: 0.88em
+                border-top-left-radius: 0
+                border-top-right-radius: 25px
+                border-bottom-left-radius: 25px
+                border-bottom-right-radius: 25px
+            
+            .chat-msg-user
+                border-top-left-radius: 25px
+                border-top-right-radius: 0px 
+                padding-left: 15px
+                padding-top: 5px
+                left: 23%
+                margin-top: 35px
+
+            .messenger-name
+                font-weight: 600
+                font-size: 0.85em
+                color: #fcfafa
+                position: relative
+                padding: 0 0 0 7px
+                margin: 0
+                top: 4.6px
+
+            .msg
+                position: relative
+                left: 0
+                margin: 0 15px 0 8px
+                max-width: 100%
+                text-align: left
+                padding: 8px 0 
+
+            .msg-time
+                font-weight: 600
+                font-size: 0.8em
+                color: #646464d8
+                position: absolute
+                padding: 0 
+                margin: 0
+                bottom: -23px
+                right: 0px
+
+            .msg-time
+                right: 0px
+
+        .leave-btn
+            width: 120px
+
+        .chat-section
+            width: 100%
+            height: 100px
+            border-top-left-radius: 0
+            border-top-right-radius: 0
+            background-color: #ededed
+            border-top: 2px solid #dbdbdb
+            padding-right: 7px
+
+            .msg-area
+                width: 90%
+
+                textarea
+                    min-height: 50% 
+                    max-height: 70%
+                    resize: none
+                    width: 100%
+                    position: relative
+                    top: 50%
+                    transform: translateY(-50%)
+                    // left: 50%
+                    // transform: translate(-57%, -50%)
+                    -ms-overflow-style: none
+                    scrollbar-width: none
+
+                    &::-webkit-scrollbar 
+                        display: none
+
+            button
+                position: relative
+                width: 120px
+                height: 40px
+                top: 50%
+                transform: translateY(-50%)
+                font-size: 20px
+
+
+    .close-icon
+        position: relative
+        display: block
+        left: 90%
+        bottom: 20px 
+
+    .con-l
+        overflow-y: scroll
+        -ms-overflow-style: none
+        scrollbar-width: none
+        margin-right: 0
+        padding-right: 0
+        height: 917px
+        min-width: 100%
+        position: absolute
+        display: none
+
+        &::-webkit-scrollbar 
+            display: none
+
+        .remove-user
+            width: 110px
+            height: fit-content
+            margin-top: 7px 
+        // added 
+        .list-group-item .user-pic .pic
+            width: 40px
+            height: 40px
+            color: white
+            border: none
+            position: relative
+            top: 50%
+            transform: translateY(-60%)
+            padding-top: 5.5px
+            font-size: 1.3em
+            font-family: 'Secular One', sans-serif
+            font-weight: 500
+
+        .list-group-item .user-pic .room-members-name
+            position: relative
+            top: 50%
+            transform: translateY(-50%)
+            font-weight: 500
+            font-size: 1.1em
+
+    .navbar-brand
+        width: 100%
+        text-align: center
+
+    .name-pic
+        background-color: #ededed
+        width: 40px
+        height: 40px
+        border-radius: 50%
+        text-align: center
+        color: black
+        font-weight: 500 
+        margin-top: 10px

@@ -35,6 +35,7 @@
 						<nav class="navbar rounded-top bg-dark bg-light">
 							<div class="container-fluid">
 							  <span class="navbar-brand mb-0 h1 text-white">Room Members</span>
+							  <img src="/static/assets/close.svg" class="close-icon" alt="">
 							</div>
 						</nav>
 					</div>
@@ -111,5 +112,34 @@
 	</div>
 
     <script src="/static/js/chatroomhandler.js"></script>
+
+	<script>
+		const mediaQuery = window.matchMedia('(max-width: 545px)')
+		// Check if the media query is true
+		if (mediaQuery.matches) {
+			$('.con-r').css('padding', '0');
+			$('#notification').removeClass('dropdown');
+			$('#notification').addClass('dropdown-center');
+			$('.dropdown-toggle').removeAttr('id');
+			$('.dropdown-toggle').attr('id', 'dropdownCenterBtn');
+			$('.dropdown-menu').removeAttr('id');
+			$('.dropdown-menu').attr('id', 'dropdownCenterBtn');
+
+			$('.navbar-brand').removeClass('ms-4')
+
+			$('.navbar-brand').on('click', () => {
+				$('.con-l').css('display', 'block');
+				$('.con-l').css('z-index', '2');
+				$('.con-l').css('position', 'relative');
+				$('.con-l').css('height', '99vh');
+				$('.con-l').css('padding-left', '0');
+				$('.con-l').removeClass('mt-1');
+			});
+
+			$('.close-icon').on('click', ()=> {
+				$('.con-l').css('display', 'none');
+			})
+		}
+	</script>
 </body>
 </html>
