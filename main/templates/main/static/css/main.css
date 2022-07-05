@@ -6,6 +6,7 @@
 
 body {
   color: black;
+  overflow: hidden;
 }
 
 .fixed, .fixed-l {
@@ -58,7 +59,7 @@ body {
 }
 .con-r .chat-logs {
   position: relative;
-  height: 82%;
+  height: 777px;
   max-width: 100%;
   background-color: #ffffff;
   overflow-y: scroll;

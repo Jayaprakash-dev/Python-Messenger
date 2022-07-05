@@ -23,23 +23,26 @@ client_socket.onmessage = (e) => {
 
     if (data.hasOwnProperty('is_host')) {
         is_host = data.is_host;
+        console.log(is_host);
     }
 
     else if (data.hasOwnProperty('notification')) { 
         // au - add user
-        $('.notification-section').append(
-            '<div class="dropdown-item rounded-bottom pb-1">'
-			+ '<p class="newly-joined-member fw-medium pb-1">'+ data.notification +'</p>'
-			+ '<div class="d-flex flex-row">'
-			+ '<button class="btn btn-primary btn-sm ok-btn">OK</button>'
-			+ '<button class="btn btn-outline-danger btn-sm remove-btn ms-2">Remove</button>'
-			+ '</div>'
-			+ '</div>'
-        );
-        $('.dropdown-toggle').css({"border-color": "red", 
-                                    "border-width":"4px", 
-                                    "border-style":"solid"
-                                });
+        if (username !== data.notification) {
+            $('.notification-section').append(
+                '<div class="dropdown-item rounded-bottom pb-1">'
+                + '<p class="newly-joined-member fw-medium pb-1">'+ data.notification +'</p>'
+                + '<div class="d-flex flex-row">'
+                + '<button class="btn btn-primary btn-sm ok-btn">OK</button>'
+                + '<button class="btn btn-outline-danger btn-sm remove-btn ms-2">Remove</button>'
+                + '</div>'
+                + '</div>'
+            );
+            $('.dropdown-toggle').css({"border-color": "red", 
+                                        "border-width":"4px", 
+                                        "border-style":"solid"
+                                    });
+        }
     }
 
     else if (data.hasOwnProperty('add_user')) {
@@ -108,6 +111,10 @@ client_socket.onmessage = (e) => {
     else if (data.hasOwnProperty('remove_user')) {
         var _user = false
 
+        if(data.remove_user === username) {
+            client_socket.close();
+        }
+
         for (var i=3; i < ($('.list-group')[0].children.length); i++) {
 
             var _child_elem = $('.list-group')[0].children[i];
@@ -142,13 +149,13 @@ client_socket.onmessage = (e) => {
 }
 
 $('.leave-room').click(['/'], remove_client); // closes socket connection and redirects host to home page
-$('.logout-btn').click(['/user/logout/'], remove_client); // Logout the host and close the socket connection.
+// $('.logout-btn').click(['/user/logout/'], remove_client); // Logout the host and close the socket connection.
     
 // removes host from the chat room and redirects to the requested url
 function remove_client(redirect_url) {
     remove_user(username)
     client_socket.close();
-    window.location.href = 'http://' + window.location.host + redirect_url;
+    window.location.href = 'http://' + window.location.host + '/';
 }
 
 $(document).on('click', '.ok-btn', (e) => {
@@ -238,10 +245,4 @@ function get_current_time() {
 // websocket close event
 client_socket.addEventListener('close', (e) => {
     window.location.href = 'http://' + window.location.host + '/';
-});
-
-window.addEventListener('beforeunload', function (e) {
-    e.preventDefault();
-    e.returnValue = '';
-    remove_user(username);
 });

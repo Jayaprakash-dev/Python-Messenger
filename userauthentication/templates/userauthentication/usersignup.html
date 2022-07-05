@@ -86,10 +86,10 @@
 
             <div class="row" style="margin-top: 17px;">
                 <p class="col">
-                    Already a member? <a href="" style="font-weight: 600;">Log in</a>
+                    Already a member? <a href={% url 'userauthentication:login' %} style="font-weight: 600;">Log in</a>
                 </p>
 
-                <a href="" class="col forgot-pass" style="text-align: right; text-decoration: none; font-weight: 600;">Forgot password</a>
+                {% comment %} <a href="" class="col forgot-pass" style="text-align: right; text-decoration: none; font-weight: 600;">Forgot password</a> {% endcomment %}
             </div>
 
             <button class="btn btn-primary" id="submit-btn" type='submit' name="submit" value="submit">create account</button>

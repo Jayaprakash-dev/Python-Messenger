@@ -34,15 +34,19 @@ class Consumer(AsyncWebsocketConsumer):
                         }))
 
                 else:
-                    rc.hset(key.decode(), self.username, self.channel_name)
+                    if rc.hexists(self.room_name, self.username) == False:
+                        rc.hset(key.decode(), self.username, self.channel_name)
 
-                    host = rc.hget(self.room_name, 'host').decode()
-                    host_channel = rc.hget(key.decode(), host).decode()
-                    
-                    await self.channel_layer.send(host_channel, {
-                        'type': 'notification',
-                        'user': self.username
-                    })
+                        host = rc.hget(self.room_name, 'host').decode()
+                        host_channel = rc.hget(key.decode(), host).decode()
+                        
+                        print(self.username)
+                        print(rc.hexists(self.room_name, self.username))
+
+                        await self.channel_layer.send(host_channel, {
+                            'type': 'notification',
+                            'user': self.username
+                        })
             
     async def receive(self, text_data=None):
         loop = asyncio.get_running_loop()

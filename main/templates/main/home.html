@@ -8,91 +8,115 @@
     <!-- css -->
     <link rel="stylesheet" href="/static/css/homepage.css">
 
-    <!-- jquery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			crossorigin="anonymous">
-    </script>
+    <!-- Bootstrap CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+	<!-- jquery CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Roboto:wght@400;500;700&family=Secular+One&display=swap" rel="stylesheet">
+   
     <title>Python Messenger</title>
 </head>
 <body>
-    
-    <div class="container" style="max-width: 100%; padding: 0;">
 
-        <nav class="navbar">
-            <ul>
-                <div class="notification-section">
-                    <img src="/static/assets/notification.svg" alt="" class="icon">
-                    <div class="badge">
-                        <div class="notify-count">2</div>
-                    </div>
-                </div>
-            </ul>
-            <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="main-container container-fluid ps-0 pe-0">
+
+        <nav class="navbar d-flex flex-row justify-content-between ps-3 pe-5 pb-2 pt-2">
+            <div>
+                <a class="navbar-brand fs-4 fw-semibold ms-4" href="/">
+                <img src="/static/assets/Chat.svg" alt="" width="30" height="24" class="d-inline-block align-text-middle logo me-2">
+                Python Messenger
+                </a>
+            </div>
+
+            <button class="btn btn-sm btn-outline-danger rounded-pill logout-btn">Logout</button>
         </nav>
 
-        <div class="main-section">
-            <button class="btn btn-primary" onclick="showForm(this)">Create room</button>
-            <button class="btn btn-primary" onclick="showForm(this)">Join room</button>
+        <div class="user-section">
+            <p class="username fs-4">Hi, {{username}}</p>
 
-            <form class="room-creation-form" method="POST" action="">
+            <div class="action-btns">
+                <button class="btn btn-primary _btn fw-semibold" id="create">Create Room</button>
+                <button class="btn btn-primary _btn ms-4 fw-semibold" id="join">Join Room</button>
+            </div>
+
+            <form class="forms rounded" id="_room-creation-form" method="POST" action="">
                 {% csrf_token %}
-                <label for="room-name" class="room-name-label">Room name</label> <br>
-                <input type="text" name="room-name" class="room-name-input" autocomplete='off' required>
-                <br>
-                <label for="password" class="password-label">Password</label> <br>
-                <input type="password" name="password" class="password-input" required>
-                <br>
-                <input type="hidden" name="type" value="c">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Room Name</label>
+                    <input type="text" name='room-name' class="form-control" placeholder="" autocomplete='off' required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="**********" required>
+                </div>
 
-                <button class="btn create-room-btn" type="submit" value="submit">Create room</button>
-                <button type='button' class="btn close" onclick="closeForm(this)">Close</button>
+                <input type="hidden" name="room_type" value="c">
+
+                <div class="form-btns d-flex flex-row justify-content-evenly"> 
+                    <button type="submit" class="btn btn-primary fw-semibold">Create</button>
+                    <button type="button" onclick="closeForm(this)" class="btn btn-primary fw-semibold">Close</button:button>
+                </div>
             </form>
 
-            <form class="room-join-form" method="POST" action="">
+            <form class="forms rounded" id="_room-joining-form" method="POST" action="">
                 {% csrf_token %}
-                <label for="room-name" class="room-name-label">Room name</label> <br>
-                <input type="text" name="room-name" class="room-name-input" autocomplete='off'  required>
-                <br>
-                <label for="password" class="password-label">Password</label> <br>
-                <input type="password" name="password" class="password-input" required>
-                <br>
-                <input type="hidden" name="type" value="j">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Room Name</label>
+                    <input type="text" name='room-name' class="form-control" placeholder="" autocomplete='off' required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="password" name='password' class="form-control" placeholder="**********" required>
+                </div>
 
-                <button class="btn create-room-btn" type="submit" value="submit">Join room</button>
-                <button type='button' class="btn close" onclick="closeForm(this)">Close</button>
+                <input type="hidden" name="room_type" value="j">
+
+                <div class="form-btns d-flex flex-row justify-content-evenly"> 
+                    <button type="submit" class="btn btn-primary fw-semibold">Join</button>
+                    <button type="button" onclick="closeForm(this)" class="btn btn-primary fw-semibold">Close</button>
+                </div>
             </form>
+
+            {% if msg %}
+                <div class="message d-flex flex-row">
+                    <img src="/static/assets/Warning.svg" class="err-icon" alt="">
+                    <p class="_msg">{{msg}}</p>
+                </div>
+            {% endif %}
+
         </div>
 
-        <p class="message">{{message}}</p>
     </div>
 
     <script type="text/javascript">
+        
+        $('#create').on('click', (e)=> {
+            $('#_room-creation-form').css('display', 'block');
+            $('#_room-joining-form').css('display', 'none');
+        });
 
-        function showForm(e) {
-            
-            if (e.textContent === 'Create room') {
-                $('.room-creation-form').css('display', 'block');
-                $('.room-join-form').css('display', 'none');
-            } else {
-                $('.room-join-form').css('display', 'block');
-                $('.room-creation-form').css('display', 'none');
-            }
-        }
+        $('#join').on('click', (e)=> {
+            $('#_room-joining-form').css('display', 'block');
+            $('#_room-creation-form').css('display', 'none');
+        });
 
         function closeForm(e) {
 
-            if (e.parentNode.className === 'room-creation-form') {
-                $('.room-creation-form').css('display', 'none');
+            if (e.parentNode.parentNode.id == '_room-creation-form') {
+                $('#_room-creation-form').css('display', 'none');
             } else {
-                $('.room-join-form').css('display', 'none');
+                $('#_room-joining-form').css('display', 'none');
             }
         }
 
-        function logout() {
-            window.location.href = '{% url "userauthentication:logout" %}'
-        }
+        $('.logout-btn').on('click', () => {
+            window.location.href = '{% url 'userauthentication:logout' %}'
+        })
 
     </script>
 </body>
