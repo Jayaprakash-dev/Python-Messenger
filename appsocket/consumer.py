@@ -75,8 +75,9 @@ class Consumer(AsyncWebsocketConsumer):
                                 'user': username
                             }
                         ))
-                        
-                    await loop.create_task(Consumer.redis_remove_user(self.room_name, username)) 
+                        await self.channel_layer.group_discard( self.room_name, (rc.hget(self.room_name, username).decode()) )
+                    
+                    await loop.create_task(Consumer.redis_remove_user(self.room_name, username))
                 
                 elif text_data.get('req_to_au'):
                     username = text_data.get('req_to_au')

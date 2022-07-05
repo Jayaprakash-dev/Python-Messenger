@@ -66,6 +66,7 @@ body {
   scrollbar-width: none;
   border-left: 0.5px solid #ededed;
   border-right: 1px solid #ededed;
+  overflow-x: hidden;
 }
 .con-r .chat-logs::-webkit-scrollbar {
   display: none;
@@ -92,7 +93,6 @@ body {
   border-top-right-radius: 0px;
   padding-left: 15px;
   padding-top: 5px;
-  left: 76%;
 }
 .con-r .chat-logs .messenger-name {
   font-weight: 600;

@@ -1,6 +1,8 @@
 const room_name = $("input[name='room_name']").val();
 const username = $("input[name='username']").val();
 
+var user_msg_count = 0
+
 var is_host = false;
 
 const client_socket = new WebSocket('ws://' + window.location.host + '/chat/room/' + room_name + '/')
@@ -35,7 +37,7 @@ client_socket.onmessage = (e) => {
 			+ '</div>'
         );
         $('.dropdown-toggle').css({"border-color": "red", 
-                                    "border-width":"2px", 
+                                    "border-width":"4px", 
                                     "border-style":"solid"
                                 });
     }
@@ -69,40 +71,72 @@ client_socket.onmessage = (e) => {
 
     else if (data.message) {
 
-        time = get_current_time();
-
-        $('.chat-logs').append(
-            '<div class="chat-msg bg-primary ms-2">'
-            + '<p class="messenger-name fw-semibold">' + data.message[0] + '</p>'
-            + '<p class="msg text-white ps-2 pe-1">' + data.message[1] + '</p>'
-            + '<p class="msg-time">12:10 PM</p>'
-            + '</div>'
-        );
+        var time = get_current_time();
 
         if (username === data.message[0]) {
-            var chat_screen_width = $('.chat-logs').width();
-            var chat_item_width = $('.chat-msg-user').width();
 
-            var left = chat_screen_width - chat_item_width;
+            $('.chat-logs').append(
+                '<div class="chat-msg-user'+ user_msg_count + ' chat-msg-user bg-primary ms-2">'
+                + '<p class="messenger-name fw-semibold pe-3">' + data.message[0] + '</p>'
+                + '<p class="msg text-white ps-2 pe-1">' + data.message[1] + '</p>'
+                + '<p class="msg-time">' + time + '</p>'
+                + '</div>'
+            );
+
+            var chat_screen_width = $('.chat-logs').width();
+            var chat_item_width = $('.chat-msg-user'+user_msg_count).width();
+
+            var left = (chat_screen_width - chat_item_width) -40;
             left = left + 'px';
 
-            $('.chat-msg-user').css('left', left);
+            $('.chat-msg-user'+user_msg_count).css('left', left);
+            user_msg_count++;
+
+        } else {
+            $('.chat-logs').append(
+                '<div class="chat-msg bg-primary ms-2">'
+                + '<p class="messenger-name fw-semibold pe-3">' + data.message[0] + '</p>'
+                + '<p class="msg text-white ps-2 pe-1">' + data.message[1] + '</p>'
+                + '<p class="msg-time">' + time + '</p>'
+                + '</div>'
+            );
         }
 
         $('.chat-logs').scrollTop = $('.chat-logs').scrollHeight;
     }
 
     else if (data.hasOwnProperty('remove_user')) {
-        var children = $('.list-group')[0].children;
-        $('.chay-logs').append(children);
+        var _user = false
 
-        for (var i=0; i<children.lenght; i++) {
-            let _child_elem = children[i];
-            console.log(_child_elem);
-            console.log(_child_elem[0].children[0].children[1].textContent);
-            if (_child_elem[0].children[0].children[1].textContent == data.remove_user) {
-                $(_child_elem).remove();
+        for (var i=3; i < ($('.list-group')[0].children.length); i++) {
+
+            var _child_elem = $('.list-group')[0].children[i];
+            var _username = $('.list-group')[0].children[i].children[0].children[1].textContent;
+            
+            if (_username == data.remove_user) {
+                _child_elem.remove();
+                _user = true;
+                break;
+            } 
+        }
+
+        if (_user === false) {
+            
+            for (var i=0; i < ($('.notification-section')[0].children.length); i++) {
+
+                var _child_elem = $('.notification-section')[0].children[i];
+                var _username = _child_elem.children[0].textContent;
+                
+                if (_username === data.remove_user) {
+                    _child_elem.remove();
+                    _user = true;
+                    break;
+                }
             }
+        }
+
+        if ($('.notification-section')[0].children.length === 0) {
+            $('.dropdown-toggle').css('border', '');
         }
     }
 }
@@ -114,7 +148,7 @@ $('.logout-btn').click(['/user/logout/'], remove_client); // Logout the host and
 function remove_client(redirect_url) {
     remove_user(username)
     client_socket.close();
-    // window.location.href = 'http://' + window.location.host + redirect_url;
+    window.location.href = 'http://' + window.location.host + redirect_url;
 }
 
 $(document).on('click', '.ok-btn', (e) => {
@@ -127,6 +161,10 @@ $(document).on('click', '.ok-btn', (e) => {
     }));
 
     current_notification_item.remove();
+
+    if ($('.notification-section')[0].children.length === 0) {
+        $('.dropdown-toggle').css('border', '');
+    }
 })
 
 // host can remove the chat members
@@ -137,6 +175,10 @@ $(document).on('click', '.remove-btn', (e) => {
     remove_user(username);
 
     current_notification_item.remove();
+
+    if ($('.notification-section')[0].children.length === 0) {
+        $('.dropdown-toggle').css('border', '');
+    }
 })
 
 $(document).on('click', '.remove-user', (e) => {
@@ -194,6 +236,12 @@ function get_current_time() {
 }
 
 // websocket close event
-// client_socket.addEventListener('close', (e) => {
-//     // window.location.href = 'http://' + window.location.host + '/';
-// });
+client_socket.addEventListener('close', (e) => {
+    window.location.href = 'http://' + window.location.host + '/';
+});
+
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    e.returnValue = '';
+    remove_user(username);
+});

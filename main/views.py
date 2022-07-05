@@ -34,8 +34,7 @@ class ChatRoom(LoginRequiredMixin, View):
                                                     'email': email,
                                                     })
             
-            
-        return render(req, 'main/home.html', {'message': "Invalid room name, please try again" })
+        return HttpResponseRedirect(reverse('main:home'))
 
 
 class HomePage(LoginRequiredMixin, View):
@@ -60,12 +59,10 @@ class HomePage(LoginRequiredMixin, View):
         elif room_type == 'j':
             
             for key in redis_client.scan_iter(room_name[0] + '*'):
-                print('key:', key.decode())
+
                 if key.decode() == room_name:
                     room_password = redis_client.hget(room_name, 'password')
                     room_password = room_password.decode()
-                    
-                    print(redis_client.hgetall(room_name))
                     
                     if password == room_password:
                         return HttpResponseRedirect(reverse('main:chat_room', kwargs={'room_name': room_name}))
