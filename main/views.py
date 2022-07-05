@@ -24,9 +24,6 @@ class ChatRoom(LoginRequiredMixin, View):
 
             if key.decode() == room_name:
                 username = req.user.username.title()
-                username_char = username[0].upper()
-                email = req.user.email
-                room_name_char = room_name[0].upper()
                 
                 if redis_client.hget(room_name, 'host') != None:
                     if  username == redis_client.hget(room_name, 'host').decode():
@@ -40,9 +37,6 @@ class ChatRoom(LoginRequiredMixin, View):
 
                 return render(req, 'main/main.html', {'room_name': room_name, 
                                                     'username': username, 
-                                                    'username_char': username_char, 
-                                                    'roomname_char': room_name_char,
-                                                    'email': email,
                                                     'chat_members': _chat_members,
                                                     'is_host': _is_host,
                                                     })
