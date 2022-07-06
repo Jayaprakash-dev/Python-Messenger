@@ -21,7 +21,7 @@ contextlib2==21.6.0
 cryptography==37.0.2
 distlib==0.3.4
 distro==1.7.0
-Django==4.0.5
+Django>=4.0.6
 dnspython==2.2.1
 entrypoints==0.4
 filelock==3.7.1
