@@ -7,7 +7,7 @@ that gives us the ability to connect with the client-side application in real ti
 In the client side of the application, I used the `Websockets API` with Javascript to establish a
 connection with the server.
 
-## Instructions
+## To run the app
 
 ### To run the app:
 
