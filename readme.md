@@ -9,8 +9,6 @@ connection with the server.
 
 ## To run the app
 
-### To run the app:
-
 Make sure you have installed <a href="https://www.djangoproject.com/download/">Django</a> & <a href="https://redis.io/download/">Redis</a> on your system. 
 Run the `manage.py` file from the root folder.
 
